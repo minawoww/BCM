@@ -10,10 +10,10 @@
 
 int main(void)
 {
-	DDRA |= 1;
 	BCM_Init();
-	uint8 Arr[] = "REZK";
-	BCM_Send(Arr, 4);
+	uint8 Arr[3] = {1, 2, 3};
+	BCM_Send(Arr, 3);
+	
 	
     while (1) 
     {

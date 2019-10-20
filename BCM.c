@@ -6,6 +6,7 @@ static volatile uint8 BufferKey = UNLOCKED;
 static volatile EnumBCMState_t CurrentState = Idle;
 static StrBCMInternalBuffer_t Buffer;
 
+static PtrV_FunctionV PtrBCM_ConsumerTx = NULL;
 
 static void BCM_TX_ISR_Callback(void)
 {
@@ -115,7 +116,10 @@ EnumBCMError_t BCM_DispatcherTx(void)
 		
 		case SendingFrameComplete:
 			// consumer
-			PORTA |= 1;
+			if (PtrBCM_ConsumerTx != NULL)
+			{
+				PtrBCM_ConsumerTx();
+			}
 			// unlock the buffer
 			BufferKey = UNLOCKED;
 			// clear the counters
@@ -131,4 +135,9 @@ EnumBCMError_t BCM_DispatcherTx(void)
 	}
 	
 	
+}
+
+void BCM_TXCCallback(PtrV_FunctionV ptr)
+{
+	PtrBCM_ConsumerTx = ptr;
 }
