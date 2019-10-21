@@ -11,12 +11,14 @@
 
 #define BCM_ID 0xA5
 
-#define	 NULL  ((void*)0)
+typedef void(*Ptr_VFunctionV)(void);
 
-typedef enum { SendInProcess , NullPtr , BCM_ok }EnumBCMError_t;
-typedef enum { Idle , SendingByte , SendingByteComplete , SendingFrameComplete }EnumBCMState_t;
+typedef enum { SendInProcess , ReceiveInProcess , NullPtr , BCM_ok }EnumBCMError_t;
+typedef enum { Idle , SendingByte , SendingByteComplete , SendingFrameComplete }EnumTxStateBCM_t;
+typedef enum { Rx_Idle , ReceivingByte, ReceivingByteComplete, ReceivingFrameComplete }EnumRxStateBCM_t;
+
 	
-typedef void(*PtrV_FunctionV)(void);
+
 
 typedef struct 
 {
@@ -30,7 +32,15 @@ typedef struct
 void BCM_Init(void);
 EnumBCMError_t BCM_Send(uint8 *Data_Buffer , uint16 Buffer_Size);
 EnumBCMError_t BCM_DispatcherTx(void);
-void BCM_TXCCallback(PtrV_FunctionV ptr);
 
+
+
+EnumBCMError_t BCM_Receive(uint8 Array[], uint16 ArrSize);
+EnumBCMError_t BCM_DispatcherRx (void);
+
+
+void BCM_SuccessfulRxCallBack (Ptr_VFunctionV PtrFunction);
+void BCM_FailedRxCallBack (Ptr_VFunctionV PtrFunction);
+void BCM_TXCCallback(Ptr_VFunctionV ptr);
 
 #endif

@@ -5,15 +5,24 @@
  * Author : minam
  */ 
 
+
 #include "BCM.h"
 
+// this function will be called when the transmition completed.
+void Tx_Consumer(void)
+{
+	// toggle led without using the DIO driver.
+	DDRA |= 1;
+	PORTA |= 1;
+}
 
 int main(void)
 {
-	BCM_Init();
-	uint8 Arr[3] = {1, 2, 3};
-	BCM_Send(Arr, 3);
 	
+	BCM_Init();
+	BCM_TXCCallback(Tx_Consumer);
+	uint8 Data_Arr[5] = "Hello";
+	BCM_Send(Data_Arr , 5);
 	
     while (1) 
     {

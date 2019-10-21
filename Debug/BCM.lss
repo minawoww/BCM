@@ -1,0 +1,715 @@
+
+BCM.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000594  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000a  00800060  00000594  00000628  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000024  0080006a  0080006a  00000632  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000632  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000664  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000108  00000000  00000000  000006a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000010a5  00000000  00000000  000007a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000971  00000000  00000000  0000184d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000715  00000000  00000000  000021be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000290  00000000  00000000  000028d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000075e  00000000  00000000  00002b64  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000043c  00000000  00000000  000032c2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000000c0  00000000  00000000  000036fe  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 9f 02 	jmp	0x53e	; 0x53e <__vector_13>
+  38:	0c 94 76 02 	jmp	0x4ec	; 0x4ec <__vector_14>
+  3c:	0c 94 4d 02 	jmp	0x49a	; 0x49a <__vector_15>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e4 e9       	ldi	r30, 0x94	; 148
+  68:	f5 e0       	ldi	r31, 0x05	; 5
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	aa 36       	cpi	r26, 0x6A	; 106
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	aa e6       	ldi	r26, 0x6A	; 106
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ae 38       	cpi	r26, 0x8E	; 142
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 d8 01 	call	0x3b0	; 0x3b0 <main>
+  8a:	0c 94 c8 02 	jmp	0x590	; 0x590 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <BCM_TX_ISR_Callback>:
+	PtrBCM_ConsumerRxSuccessful = PtrFunction;
+}
+
+void BCM_FailedRxCallBack (Ptr_VFunctionV PtrFunction)
+{
+	PtrBCM_ConsumerRxFailed = PtrFunction;
+  92:	82 e0       	ldi	r24, 0x02	; 2
+  94:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+  98:	08 95       	ret
+
+0000009a <BCM_RxISRCallBack>:
+  9a:	cf 93       	push	r28
+  9c:	df 93       	push	r29
+  9e:	1f 92       	push	r1
+  a0:	cd b7       	in	r28, 0x3d	; 61
+  a2:	de b7       	in	r29, 0x3e	; 62
+  a4:	ce 01       	movw	r24, r28
+  a6:	01 96       	adiw	r24, 0x01	; 1
+  a8:	0e 94 3f 02 	call	0x47e	; 0x47e <UART_Receive>
+  ac:	80 91 74 00 	lds	r24, 0x0074	; 0x800074 <RxBytesCounter>
+  b0:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <RxBytesCounter+0x1>
+  b4:	01 96       	adiw	r24, 0x01	; 1
+  b6:	90 93 75 00 	sts	0x0075, r25	; 0x800075 <RxBytesCounter+0x1>
+  ba:	80 93 74 00 	sts	0x0074, r24	; 0x800074 <RxBytesCounter>
+  be:	80 91 86 00 	lds	r24, 0x0086	; 0x800086 <RxBufferKey>
+  c2:	81 30       	cpi	r24, 0x01	; 1
+  c4:	09 f0       	breq	.+2      	; 0xc8 <BCM_RxISRCallBack+0x2e>
+  c6:	87 c0       	rjmp	.+270    	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+  c8:	80 91 74 00 	lds	r24, 0x0074	; 0x800074 <RxBytesCounter>
+  cc:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <RxBytesCounter+0x1>
+  d0:	01 97       	sbiw	r24, 0x01	; 1
+  d2:	89 f4       	brne	.+34     	; 0xf6 <BCM_RxISRCallBack+0x5c>
+  d4:	89 81       	ldd	r24, Y+1	; 0x01
+  d6:	80 93 78 00 	sts	0x0078, r24	; 0x800078 <RxBuffer>
+  da:	85 3a       	cpi	r24, 0xA5	; 165
+  dc:	39 f4       	brne	.+14     	; 0xec <BCM_RxISRCallBack+0x52>
+  de:	99 81       	ldd	r25, Y+1	; 0x01
+  e0:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <RxReceivingCheckSum>
+  e4:	89 0f       	add	r24, r25
+  e6:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <RxReceivingCheckSum>
+  ea:	75 c0       	rjmp	.+234    	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+  ec:	10 92 75 00 	sts	0x0075, r1	; 0x800075 <RxBytesCounter+0x1>
+  f0:	10 92 74 00 	sts	0x0074, r1	; 0x800074 <RxBytesCounter>
+  f4:	70 c0       	rjmp	.+224    	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+  f6:	80 91 74 00 	lds	r24, 0x0074	; 0x800074 <RxBytesCounter>
+  fa:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <RxBytesCounter+0x1>
+  fe:	02 97       	sbiw	r24, 0x02	; 2
+ 100:	69 f4       	brne	.+26     	; 0x11c <BCM_RxISRCallBack+0x82>
+ 102:	89 81       	ldd	r24, Y+1	; 0x01
+ 104:	90 e0       	ldi	r25, 0x00	; 0
+ 106:	90 93 7d 00 	sts	0x007D, r25	; 0x80007d <RxBuffer+0x5>
+ 10a:	80 93 7c 00 	sts	0x007C, r24	; 0x80007c <RxBuffer+0x4>
+ 10e:	99 81       	ldd	r25, Y+1	; 0x01
+ 110:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <RxReceivingCheckSum>
+ 114:	89 0f       	add	r24, r25
+ 116:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <RxReceivingCheckSum>
+ 11a:	5d c0       	rjmp	.+186    	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+ 11c:	80 91 74 00 	lds	r24, 0x0074	; 0x800074 <RxBytesCounter>
+ 120:	90 91 75 00 	lds	r25, 0x0075	; 0x800075 <RxBytesCounter+0x1>
+ 124:	03 97       	sbiw	r24, 0x03	; 3
+ 126:	e9 f4       	brne	.+58     	; 0x162 <BCM_RxISRCallBack+0xc8>
+ 128:	9b b3       	in	r25, 0x1b	; 27
+ 12a:	81 e0       	ldi	r24, 0x01	; 1
+ 12c:	89 27       	eor	r24, r25
+ 12e:	8b bb       	out	0x1b, r24	; 27
+ 130:	e8 e7       	ldi	r30, 0x78	; 120
+ 132:	f0 e0       	ldi	r31, 0x00	; 0
+ 134:	84 81       	ldd	r24, Z+4	; 0x04
+ 136:	95 81       	ldd	r25, Z+5	; 0x05
+ 138:	99 27       	eor	r25, r25
+ 13a:	95 83       	std	Z+5, r25	; 0x05
+ 13c:	84 83       	std	Z+4, r24	; 0x04
+ 13e:	29 81       	ldd	r18, Y+1	; 0x01
+ 140:	39 81       	ldd	r19, Y+1	; 0x01
+ 142:	20 91 72 00 	lds	r18, 0x0072	; 0x800072 <RxReceivingCheckSum>
+ 146:	23 0f       	add	r18, r19
+ 148:	20 93 72 00 	sts	0x0072, r18	; 0x800072 <RxReceivingCheckSum>
+ 14c:	20 91 76 00 	lds	r18, 0x0076	; 0x800076 <ApplicationArraySize>
+ 150:	30 91 77 00 	lds	r19, 0x0077	; 0x800077 <ApplicationArraySize+0x1>
+ 154:	28 17       	cp	r18, r24
+ 156:	39 07       	cpc	r19, r25
+ 158:	f0 f5       	brcc	.+124    	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+ 15a:	81 e0       	ldi	r24, 0x01	; 1
+ 15c:	80 93 73 00 	sts	0x0073, r24	; 0x800073 <RxInsufficientSize>
+ 160:	3a c0       	rjmp	.+116    	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+ 162:	80 91 73 00 	lds	r24, 0x0073	; 0x800073 <RxInsufficientSize>
+ 166:	81 11       	cpse	r24, r1
+ 168:	24 c0       	rjmp	.+72     	; 0x1b2 <BCM_RxISRCallBack+0x118>
+ 16a:	20 91 74 00 	lds	r18, 0x0074	; 0x800074 <RxBytesCounter>
+ 16e:	30 91 75 00 	lds	r19, 0x0075	; 0x800075 <RxBytesCounter+0x1>
+ 172:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <RxBuffer+0x4>
+ 176:	90 91 7d 00 	lds	r25, 0x007D	; 0x80007d <RxBuffer+0x5>
+ 17a:	03 96       	adiw	r24, 0x03	; 3
+ 17c:	82 17       	cp	r24, r18
+ 17e:	93 07       	cpc	r25, r19
+ 180:	c0 f0       	brcs	.+48     	; 0x1b2 <BCM_RxISRCallBack+0x118>
+ 182:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <Local_Iterator.1647>
+ 186:	90 91 6f 00 	lds	r25, 0x006F	; 0x80006f <Local_Iterator.1647+0x1>
+ 18a:	29 81       	ldd	r18, Y+1	; 0x01
+ 18c:	e0 91 79 00 	lds	r30, 0x0079	; 0x800079 <RxBuffer+0x1>
+ 190:	f0 91 7a 00 	lds	r31, 0x007A	; 0x80007a <RxBuffer+0x2>
+ 194:	e8 0f       	add	r30, r24
+ 196:	f9 1f       	adc	r31, r25
+ 198:	20 83       	st	Z, r18
+ 19a:	01 96       	adiw	r24, 0x01	; 1
+ 19c:	90 93 6f 00 	sts	0x006F, r25	; 0x80006f <Local_Iterator.1647+0x1>
+ 1a0:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <Local_Iterator.1647>
+ 1a4:	99 81       	ldd	r25, Y+1	; 0x01
+ 1a6:	80 91 72 00 	lds	r24, 0x0072	; 0x800072 <RxReceivingCheckSum>
+ 1aa:	89 0f       	add	r24, r25
+ 1ac:	80 93 72 00 	sts	0x0072, r24	; 0x800072 <RxReceivingCheckSum>
+ 1b0:	12 c0       	rjmp	.+36     	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+ 1b2:	20 91 74 00 	lds	r18, 0x0074	; 0x800074 <RxBytesCounter>
+ 1b6:	30 91 75 00 	lds	r19, 0x0075	; 0x800075 <RxBytesCounter+0x1>
+ 1ba:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <RxBuffer+0x4>
+ 1be:	90 91 7d 00 	lds	r25, 0x007D	; 0x80007d <RxBuffer+0x5>
+ 1c2:	04 96       	adiw	r24, 0x04	; 4
+ 1c4:	82 17       	cp	r24, r18
+ 1c6:	93 07       	cpc	r25, r19
+ 1c8:	31 f4       	brne	.+12     	; 0x1d6 <BCM_RxISRCallBack+0x13c>
+ 1ca:	89 81       	ldd	r24, Y+1	; 0x01
+ 1cc:	80 93 7b 00 	sts	0x007B, r24	; 0x80007b <RxBuffer+0x3>
+ 1d0:	83 e0       	ldi	r24, 0x03	; 3
+ 1d2:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <Rx_CurrentState>
+ 1d6:	0f 90       	pop	r0
+ 1d8:	df 91       	pop	r29
+ 1da:	cf 91       	pop	r28
+ 1dc:	08 95       	ret
+
+000001de <BCM_Init>:
+ 1de:	89 e4       	ldi	r24, 0x49	; 73
+ 1e0:	90 e0       	ldi	r25, 0x00	; 0
+ 1e2:	0e 94 43 02 	call	0x486	; 0x486 <UART_SetterTransmit>
+ 1e6:	8d e4       	ldi	r24, 0x4D	; 77
+ 1e8:	90 e0       	ldi	r25, 0x00	; 0
+ 1ea:	0e 94 48 02 	call	0x490	; 0x490 <UART_SetterReceive>
+ 1ee:	0e 94 f7 01 	call	0x3ee	; 0x3ee <UART_Init>
+ 1f2:	08 95       	ret
+
+000001f4 <BCM_Send>:
+ 1f4:	9c 01       	movw	r18, r24
+ 1f6:	90 91 87 00 	lds	r25, 0x0087	; 0x800087 <BufferKey>
+ 1fa:	91 30       	cpi	r25, 0x01	; 1
+ 1fc:	71 f0       	breq	.+28     	; 0x21a <BCM_Send+0x26>
+ 1fe:	81 e0       	ldi	r24, 0x01	; 1
+ 200:	80 93 87 00 	sts	0x0087, r24	; 0x800087 <BufferKey>
+ 204:	ee e7       	ldi	r30, 0x7E	; 126
+ 206:	f0 e0       	ldi	r31, 0x00	; 0
+ 208:	85 ea       	ldi	r24, 0xA5	; 165
+ 20a:	80 83       	st	Z, r24
+ 20c:	75 83       	std	Z+5, r23	; 0x05
+ 20e:	64 83       	std	Z+4, r22	; 0x04
+ 210:	32 83       	std	Z+2, r19	; 0x02
+ 212:	21 83       	std	Z+1, r18	; 0x01
+ 214:	13 82       	std	Z+3, r1	; 0x03
+ 216:	83 e0       	ldi	r24, 0x03	; 3
+ 218:	08 95       	ret
+ 21a:	80 e0       	ldi	r24, 0x00	; 0
+ 21c:	08 95       	ret
+
+0000021e <BCM_DispatcherTx>:
+ 21e:	cf 93       	push	r28
+ 220:	df 93       	push	r29
+ 222:	80 91 85 00 	lds	r24, 0x0085	; 0x800085 <CurrentState>
+ 226:	82 30       	cpi	r24, 0x02	; 2
+ 228:	f1 f0       	breq	.+60     	; 0x266 <BCM_DispatcherTx+0x48>
+ 22a:	83 30       	cpi	r24, 0x03	; 3
+ 22c:	09 f4       	brne	.+2      	; 0x230 <BCM_DispatcherTx+0x12>
+ 22e:	a2 c0       	rjmp	.+324    	; 0x374 <BCM_DispatcherTx+0x156>
+ 230:	81 11       	cpse	r24, r1
+ 232:	b3 c0       	rjmp	.+358    	; 0x39a <BCM_DispatcherTx+0x17c>
+ 234:	80 91 87 00 	lds	r24, 0x0087	; 0x800087 <BufferKey>
+ 238:	81 30       	cpi	r24, 0x01	; 1
+ 23a:	09 f0       	breq	.+2      	; 0x23e <BCM_DispatcherTx+0x20>
+ 23c:	ae c0       	rjmp	.+348    	; 0x39a <BCM_DispatcherTx+0x17c>
+ 23e:	ce e7       	ldi	r28, 0x7E	; 126
+ 240:	d0 e0       	ldi	r29, 0x00	; 0
+ 242:	88 81       	ld	r24, Y
+ 244:	90 e0       	ldi	r25, 0x00	; 0
+ 246:	0e 94 3d 02 	call	0x47a	; 0x47a <UART_Transmit>
+ 24a:	81 e0       	ldi	r24, 0x01	; 1
+ 24c:	90 e0       	ldi	r25, 0x00	; 0
+ 24e:	90 93 6d 00 	sts	0x006D, r25	; 0x80006d <BytesCounter.1668+0x1>
+ 252:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <BytesCounter.1668>
+ 256:	9b 81       	ldd	r25, Y+3	; 0x03
+ 258:	88 81       	ld	r24, Y
+ 25a:	89 0f       	add	r24, r25
+ 25c:	8b 83       	std	Y+3, r24	; 0x03
+ 25e:	81 e0       	ldi	r24, 0x01	; 1
+ 260:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+ 264:	9a c0       	rjmp	.+308    	; 0x39a <BCM_DispatcherTx+0x17c>
+ 266:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <Buffer+0x4>
+ 26a:	90 91 83 00 	lds	r25, 0x0083	; 0x800083 <Buffer+0x5>
+ 26e:	20 91 6c 00 	lds	r18, 0x006C	; 0x80006c <BytesCounter.1668>
+ 272:	30 91 6d 00 	lds	r19, 0x006D	; 0x80006d <BytesCounter.1668+0x1>
+ 276:	ac 01       	movw	r20, r24
+ 278:	4c 5f       	subi	r20, 0xFC	; 252
+ 27a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 27c:	42 17       	cp	r20, r18
+ 27e:	53 07       	cpc	r21, r19
+ 280:	21 f4       	brne	.+8      	; 0x28a <BCM_DispatcherTx+0x6c>
+ 282:	83 e0       	ldi	r24, 0x03	; 3
+ 284:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+ 288:	88 c0       	rjmp	.+272    	; 0x39a <BCM_DispatcherTx+0x17c>
+ 28a:	21 30       	cpi	r18, 0x01	; 1
+ 28c:	31 05       	cpc	r19, r1
+ 28e:	b1 f4       	brne	.+44     	; 0x2bc <BCM_DispatcherTx+0x9e>
+ 290:	99 27       	eor	r25, r25
+ 292:	0e 94 3d 02 	call	0x47a	; 0x47a <UART_Transmit>
+ 296:	81 e0       	ldi	r24, 0x01	; 1
+ 298:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+ 29c:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <BytesCounter.1668>
+ 2a0:	90 91 6d 00 	lds	r25, 0x006D	; 0x80006d <BytesCounter.1668+0x1>
+ 2a4:	01 96       	adiw	r24, 0x01	; 1
+ 2a6:	90 93 6d 00 	sts	0x006D, r25	; 0x80006d <BytesCounter.1668+0x1>
+ 2aa:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <BytesCounter.1668>
+ 2ae:	ee e7       	ldi	r30, 0x7E	; 126
+ 2b0:	f0 e0       	ldi	r31, 0x00	; 0
+ 2b2:	93 81       	ldd	r25, Z+3	; 0x03
+ 2b4:	84 81       	ldd	r24, Z+4	; 0x04
+ 2b6:	89 0f       	add	r24, r25
+ 2b8:	83 83       	std	Z+3, r24	; 0x03
+ 2ba:	6f c0       	rjmp	.+222    	; 0x39a <BCM_DispatcherTx+0x17c>
+ 2bc:	22 30       	cpi	r18, 0x02	; 2
+ 2be:	31 05       	cpc	r19, r1
+ 2c0:	b9 f4       	brne	.+46     	; 0x2f0 <BCM_DispatcherTx+0xd2>
+ 2c2:	89 2f       	mov	r24, r25
+ 2c4:	90 e0       	ldi	r25, 0x00	; 0
+ 2c6:	0e 94 3d 02 	call	0x47a	; 0x47a <UART_Transmit>
+ 2ca:	81 e0       	ldi	r24, 0x01	; 1
+ 2cc:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+ 2d0:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <BytesCounter.1668>
+ 2d4:	90 91 6d 00 	lds	r25, 0x006D	; 0x80006d <BytesCounter.1668+0x1>
+ 2d8:	01 96       	adiw	r24, 0x01	; 1
+ 2da:	90 93 6d 00 	sts	0x006D, r25	; 0x80006d <BytesCounter.1668+0x1>
+ 2de:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <BytesCounter.1668>
+ 2e2:	ee e7       	ldi	r30, 0x7E	; 126
+ 2e4:	f0 e0       	ldi	r31, 0x00	; 0
+ 2e6:	85 81       	ldd	r24, Z+5	; 0x05
+ 2e8:	93 81       	ldd	r25, Z+3	; 0x03
+ 2ea:	89 0f       	add	r24, r25
+ 2ec:	83 83       	std	Z+3, r24	; 0x03
+ 2ee:	55 c0       	rjmp	.+170    	; 0x39a <BCM_DispatcherTx+0x17c>
+ 2f0:	02 96       	adiw	r24, 0x02	; 2
+ 2f2:	82 17       	cp	r24, r18
+ 2f4:	93 07       	cpc	r25, r19
+ 2f6:	60 f1       	brcs	.+88     	; 0x350 <BCM_DispatcherTx+0x132>
+ 2f8:	ce e7       	ldi	r28, 0x7E	; 126
+ 2fa:	d0 e0       	ldi	r29, 0x00	; 0
+ 2fc:	e9 81       	ldd	r30, Y+1	; 0x01
+ 2fe:	fa 81       	ldd	r31, Y+2	; 0x02
+ 300:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+ 304:	90 91 6b 00 	lds	r25, 0x006B	; 0x80006b <__data_end+0x1>
+ 308:	e8 0f       	add	r30, r24
+ 30a:	f9 1f       	adc	r31, r25
+ 30c:	80 81       	ld	r24, Z
+ 30e:	90 e0       	ldi	r25, 0x00	; 0
+ 310:	0e 94 3d 02 	call	0x47a	; 0x47a <UART_Transmit>
+ 314:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <__data_end>
+ 318:	90 91 6b 00 	lds	r25, 0x006B	; 0x80006b <__data_end+0x1>
+ 31c:	e9 81       	ldd	r30, Y+1	; 0x01
+ 31e:	fa 81       	ldd	r31, Y+2	; 0x02
+ 320:	e8 0f       	add	r30, r24
+ 322:	f9 1f       	adc	r31, r25
+ 324:	30 81       	ld	r19, Z
+ 326:	2b 81       	ldd	r18, Y+3	; 0x03
+ 328:	23 0f       	add	r18, r19
+ 32a:	2b 83       	std	Y+3, r18	; 0x03
+ 32c:	01 96       	adiw	r24, 0x01	; 1
+ 32e:	90 93 6b 00 	sts	0x006B, r25	; 0x80006b <__data_end+0x1>
+ 332:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <__data_end>
+ 336:	81 e0       	ldi	r24, 0x01	; 1
+ 338:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+ 33c:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <BytesCounter.1668>
+ 340:	90 91 6d 00 	lds	r25, 0x006D	; 0x80006d <BytesCounter.1668+0x1>
+ 344:	01 96       	adiw	r24, 0x01	; 1
+ 346:	90 93 6d 00 	sts	0x006D, r25	; 0x80006d <BytesCounter.1668+0x1>
+ 34a:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <BytesCounter.1668>
+ 34e:	25 c0       	rjmp	.+74     	; 0x39a <BCM_DispatcherTx+0x17c>
+ 350:	80 91 81 00 	lds	r24, 0x0081	; 0x800081 <Buffer+0x3>
+ 354:	90 e0       	ldi	r25, 0x00	; 0
+ 356:	0e 94 3d 02 	call	0x47a	; 0x47a <UART_Transmit>
+ 35a:	81 e0       	ldi	r24, 0x01	; 1
+ 35c:	80 93 85 00 	sts	0x0085, r24	; 0x800085 <CurrentState>
+ 360:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <BytesCounter.1668>
+ 364:	90 91 6d 00 	lds	r25, 0x006D	; 0x80006d <BytesCounter.1668+0x1>
+ 368:	01 96       	adiw	r24, 0x01	; 1
+ 36a:	90 93 6d 00 	sts	0x006D, r25	; 0x80006d <BytesCounter.1668+0x1>
+ 36e:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <BytesCounter.1668>
+ 372:	13 c0       	rjmp	.+38     	; 0x39a <BCM_DispatcherTx+0x17c>
+ 374:	e0 91 70 00 	lds	r30, 0x0070	; 0x800070 <PtrBCM_ConsumerTx>
+ 378:	f0 91 71 00 	lds	r31, 0x0071	; 0x800071 <PtrBCM_ConsumerTx+0x1>
+ 37c:	30 97       	sbiw	r30, 0x00	; 0
+ 37e:	09 f0       	breq	.+2      	; 0x382 <BCM_DispatcherTx+0x164>
+ 380:	09 95       	icall
+ 382:	10 92 87 00 	sts	0x0087, r1	; 0x800087 <BufferKey>
+ 386:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <BytesCounter.1668+0x1>
+ 38a:	10 92 6c 00 	sts	0x006C, r1	; 0x80006c <BytesCounter.1668>
+ 38e:	10 92 6b 00 	sts	0x006B, r1	; 0x80006b <__data_end+0x1>
+ 392:	10 92 6a 00 	sts	0x006A, r1	; 0x80006a <__data_end>
+ 396:	10 92 85 00 	sts	0x0085, r1	; 0x800085 <CurrentState>
+ 39a:	df 91       	pop	r29
+ 39c:	cf 91       	pop	r28
+ 39e:	08 95       	ret
+
+000003a0 <BCM_TXCCallback>:
+}
+
+void BCM_TXCCallback(Ptr_VFunctionV ptr)
+{
+	PtrBCM_ConsumerTx = ptr;
+ 3a0:	90 93 71 00 	sts	0x0071, r25	; 0x800071 <PtrBCM_ConsumerTx+0x1>
+ 3a4:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <PtrBCM_ConsumerTx>
+ 3a8:	08 95       	ret
+
+000003aa <Tx_Consumer>:
+
+// this function will be called when the transmition completed.
+void Tx_Consumer(void)
+{
+	// toggle led without using the DIO driver.
+	DDRA |= 1;
+ 3aa:	d0 9a       	sbi	0x1a, 0	; 26
+	PORTA |= 1;
+ 3ac:	d8 9a       	sbi	0x1b, 0	; 27
+ 3ae:	08 95       	ret
+
+000003b0 <main>:
+}
+
+int main(void)
+{
+ 3b0:	cf 93       	push	r28
+ 3b2:	df 93       	push	r29
+ 3b4:	00 d0       	rcall	.+0      	; 0x3b6 <main+0x6>
+ 3b6:	00 d0       	rcall	.+0      	; 0x3b8 <main+0x8>
+ 3b8:	1f 92       	push	r1
+ 3ba:	cd b7       	in	r28, 0x3d	; 61
+ 3bc:	de b7       	in	r29, 0x3e	; 62
+	
+	BCM_Init();
+ 3be:	0e 94 ef 00 	call	0x1de	; 0x1de <BCM_Init>
+	BCM_TXCCallback(Tx_Consumer);
+ 3c2:	85 ed       	ldi	r24, 0xD5	; 213
+ 3c4:	91 e0       	ldi	r25, 0x01	; 1
+ 3c6:	0e 94 d0 01 	call	0x3a0	; 0x3a0 <BCM_TXCCallback>
+	uint8 Data_Arr[5] = "Hello";
+ 3ca:	85 e0       	ldi	r24, 0x05	; 5
+ 3cc:	e4 e6       	ldi	r30, 0x64	; 100
+ 3ce:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d0:	de 01       	movw	r26, r28
+ 3d2:	11 96       	adiw	r26, 0x01	; 1
+ 3d4:	01 90       	ld	r0, Z+
+ 3d6:	0d 92       	st	X+, r0
+ 3d8:	8a 95       	dec	r24
+ 3da:	e1 f7       	brne	.-8      	; 0x3d4 <main+0x24>
+	BCM_Send(Data_Arr , 5);
+ 3dc:	65 e0       	ldi	r22, 0x05	; 5
+ 3de:	70 e0       	ldi	r23, 0x00	; 0
+ 3e0:	ce 01       	movw	r24, r28
+ 3e2:	01 96       	adiw	r24, 0x01	; 1
+ 3e4:	0e 94 fa 00 	call	0x1f4	; 0x1f4 <BCM_Send>
+	
+    while (1) 
+    {
+		BCM_DispatcherTx();
+ 3e8:	0e 94 0f 01 	call	0x21e	; 0x21e <BCM_DispatcherTx>
+ 3ec:	fd cf       	rjmp	.-6      	; 0x3e8 <main+0x38>
+
+000003ee <UART_Init>:
+void UART_SetterTransmit(void (*Ptr_1) (void)){
+	Transmiter_Ptr = Ptr_1;
+}
+
+void UART_SetterUDREmpty(void (*Ptr_1) (void)){
+	UDR_Ptr = Ptr_1;
+ 3ee:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <UART_Array_Conf>
+ 3f2:	81 30       	cpi	r24, 0x01	; 1
+ 3f4:	39 f0       	breq	.+14     	; 0x404 <__LOCK_REGION_LENGTH__+0x4>
+ 3f6:	18 f0       	brcs	.+6      	; 0x3fe <UART_Init+0x10>
+ 3f8:	82 30       	cpi	r24, 0x02	; 2
+ 3fa:	39 f0       	breq	.+14     	; 0x40a <__LOCK_REGION_LENGTH__+0xa>
+ 3fc:	0a c0       	rjmp	.+20     	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
+ 3fe:	53 9a       	sbi	0x0a, 3	; 10
+ 400:	81 e0       	ldi	r24, 0x01	; 1
+ 402:	08 c0       	rjmp	.+16     	; 0x414 <__LOCK_REGION_LENGTH__+0x14>
+ 404:	54 9a       	sbi	0x0a, 4	; 10
+ 406:	81 e0       	ldi	r24, 0x01	; 1
+ 408:	05 c0       	rjmp	.+10     	; 0x414 <__LOCK_REGION_LENGTH__+0x14>
+ 40a:	53 9a       	sbi	0x0a, 3	; 10
+ 40c:	54 9a       	sbi	0x0a, 4	; 10
+ 40e:	81 e0       	ldi	r24, 0x01	; 1
+ 410:	01 c0       	rjmp	.+2      	; 0x414 <__LOCK_REGION_LENGTH__+0x14>
+ 412:	80 e0       	ldi	r24, 0x00	; 0
+ 414:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <UART_Array_Conf+0x2>
+ 418:	91 11       	cpse	r25, r1
+ 41a:	04 c0       	rjmp	.+8      	; 0x424 <__LOCK_REGION_LENGTH__+0x24>
+ 41c:	90 b5       	in	r25, 0x20	; 32
+ 41e:	96 68       	ori	r25, 0x86	; 134
+ 420:	90 bd       	out	0x20, r25	; 32
+ 422:	01 c0       	rjmp	.+2      	; 0x426 <__LOCK_REGION_LENGTH__+0x26>
+ 424:	80 e0       	ldi	r24, 0x00	; 0
+ 426:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <UART_Array_Conf+0x1>
+ 42a:	91 11       	cpse	r25, r1
+ 42c:	04 c0       	rjmp	.+8      	; 0x436 <__LOCK_REGION_LENGTH__+0x36>
+ 42e:	10 bc       	out	0x20, r1	; 32
+ 430:	93 e3       	ldi	r25, 0x33	; 51
+ 432:	99 b9       	out	0x09, r25	; 9
+ 434:	01 c0       	rjmp	.+2      	; 0x438 <__LOCK_REGION_LENGTH__+0x38>
+ 436:	80 e0       	ldi	r24, 0x00	; 0
+ 438:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <UART_Array_Conf+0x3>
+ 43c:	99 23       	and	r25, r25
+ 43e:	e1 f0       	breq	.+56     	; 0x478 <__LOCK_REGION_LENGTH__+0x78>
+ 440:	91 30       	cpi	r25, 0x01	; 1
+ 442:	11 f0       	breq	.+4      	; 0x448 <__LOCK_REGION_LENGTH__+0x48>
+ 444:	80 e0       	ldi	r24, 0x00	; 0
+ 446:	08 95       	ret
+ 448:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <UART_Array_Conf>
+ 44c:	91 11       	cpse	r25, r1
+ 44e:	05 c0       	rjmp	.+10     	; 0x45a <__LOCK_REGION_LENGTH__+0x5a>
+ 450:	56 9a       	sbi	0x0a, 6	; 10
+ 452:	9f b7       	in	r25, 0x3f	; 63
+ 454:	90 68       	ori	r25, 0x80	; 128
+ 456:	9f bf       	out	0x3f, r25	; 63
+ 458:	08 95       	ret
+ 45a:	91 30       	cpi	r25, 0x01	; 1
+ 45c:	29 f4       	brne	.+10     	; 0x468 <__LOCK_REGION_LENGTH__+0x68>
+ 45e:	57 9a       	sbi	0x0a, 7	; 10
+ 460:	9f b7       	in	r25, 0x3f	; 63
+ 462:	90 68       	ori	r25, 0x80	; 128
+ 464:	9f bf       	out	0x3f, r25	; 63
+ 466:	08 95       	ret
+ 468:	92 30       	cpi	r25, 0x02	; 2
+ 46a:	31 f4       	brne	.+12     	; 0x478 <__LOCK_REGION_LENGTH__+0x78>
+ 46c:	9a b1       	in	r25, 0x0a	; 10
+ 46e:	90 6c       	ori	r25, 0xC0	; 192
+ 470:	9a b9       	out	0x0a, r25	; 10
+ 472:	9f b7       	in	r25, 0x3f	; 63
+ 474:	90 68       	ori	r25, 0x80	; 128
+ 476:	9f bf       	out	0x3f, r25	; 63
+ 478:	08 95       	ret
+
+0000047a <UART_Transmit>:
+ 47a:	8c b9       	out	0x0c, r24	; 12
+ 47c:	08 95       	ret
+
+0000047e <UART_Receive>:
+ 47e:	2c b1       	in	r18, 0x0c	; 12
+ 480:	fc 01       	movw	r30, r24
+ 482:	20 83       	st	Z, r18
+ 484:	08 95       	ret
+
+00000486 <UART_SetterTransmit>:
+ 486:	90 93 8d 00 	sts	0x008D, r25	; 0x80008d <Transmiter_Ptr+0x1>
+ 48a:	80 93 8c 00 	sts	0x008C, r24	; 0x80008c <Transmiter_Ptr>
+ 48e:	08 95       	ret
+
+00000490 <UART_SetterReceive>:
+}
+
+void UART_SetterReceive(void (*Ptr_2) (void)){
+	Receiver_Ptr = Ptr_2;
+ 490:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <Receiver_Ptr+0x1>
+ 494:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <Receiver_Ptr>
+ 498:	08 95       	ret
+
+0000049a <__vector_15>:
+}
+
+ISR(USART_TXC_vect){
+ 49a:	1f 92       	push	r1
+ 49c:	0f 92       	push	r0
+ 49e:	0f b6       	in	r0, 0x3f	; 63
+ 4a0:	0f 92       	push	r0
+ 4a2:	11 24       	eor	r1, r1
+ 4a4:	2f 93       	push	r18
+ 4a6:	3f 93       	push	r19
+ 4a8:	4f 93       	push	r20
+ 4aa:	5f 93       	push	r21
+ 4ac:	6f 93       	push	r22
+ 4ae:	7f 93       	push	r23
+ 4b0:	8f 93       	push	r24
+ 4b2:	9f 93       	push	r25
+ 4b4:	af 93       	push	r26
+ 4b6:	bf 93       	push	r27
+ 4b8:	ef 93       	push	r30
+ 4ba:	ff 93       	push	r31
+	
+	if ( Transmiter_Ptr != NULL){
+ 4bc:	e0 91 8c 00 	lds	r30, 0x008C	; 0x80008c <Transmiter_Ptr>
+ 4c0:	f0 91 8d 00 	lds	r31, 0x008D	; 0x80008d <Transmiter_Ptr+0x1>
+ 4c4:	30 97       	sbiw	r30, 0x00	; 0
+ 4c6:	09 f0       	breq	.+2      	; 0x4ca <__vector_15+0x30>
+		Transmiter_Ptr();
+ 4c8:	09 95       	icall
+	}
+}
+ 4ca:	ff 91       	pop	r31
+ 4cc:	ef 91       	pop	r30
+ 4ce:	bf 91       	pop	r27
+ 4d0:	af 91       	pop	r26
+ 4d2:	9f 91       	pop	r25
+ 4d4:	8f 91       	pop	r24
+ 4d6:	7f 91       	pop	r23
+ 4d8:	6f 91       	pop	r22
+ 4da:	5f 91       	pop	r21
+ 4dc:	4f 91       	pop	r20
+ 4de:	3f 91       	pop	r19
+ 4e0:	2f 91       	pop	r18
+ 4e2:	0f 90       	pop	r0
+ 4e4:	0f be       	out	0x3f, r0	; 63
+ 4e6:	0f 90       	pop	r0
+ 4e8:	1f 90       	pop	r1
+ 4ea:	18 95       	reti
+
+000004ec <__vector_14>:
+
+ISR(USART_UDRE_vect){
+ 4ec:	1f 92       	push	r1
+ 4ee:	0f 92       	push	r0
+ 4f0:	0f b6       	in	r0, 0x3f	; 63
+ 4f2:	0f 92       	push	r0
+ 4f4:	11 24       	eor	r1, r1
+ 4f6:	2f 93       	push	r18
+ 4f8:	3f 93       	push	r19
+ 4fa:	4f 93       	push	r20
+ 4fc:	5f 93       	push	r21
+ 4fe:	6f 93       	push	r22
+ 500:	7f 93       	push	r23
+ 502:	8f 93       	push	r24
+ 504:	9f 93       	push	r25
+ 506:	af 93       	push	r26
+ 508:	bf 93       	push	r27
+ 50a:	ef 93       	push	r30
+ 50c:	ff 93       	push	r31
+	
+	if ( UDR_Ptr != NULL){
+ 50e:	e0 91 8a 00 	lds	r30, 0x008A	; 0x80008a <UDR_Ptr>
+ 512:	f0 91 8b 00 	lds	r31, 0x008B	; 0x80008b <UDR_Ptr+0x1>
+ 516:	30 97       	sbiw	r30, 0x00	; 0
+ 518:	09 f0       	breq	.+2      	; 0x51c <__vector_14+0x30>
+		UDR_Ptr();
+ 51a:	09 95       	icall
+	}
+	
+}
+ 51c:	ff 91       	pop	r31
+ 51e:	ef 91       	pop	r30
+ 520:	bf 91       	pop	r27
+ 522:	af 91       	pop	r26
+ 524:	9f 91       	pop	r25
+ 526:	8f 91       	pop	r24
+ 528:	7f 91       	pop	r23
+ 52a:	6f 91       	pop	r22
+ 52c:	5f 91       	pop	r21
+ 52e:	4f 91       	pop	r20
+ 530:	3f 91       	pop	r19
+ 532:	2f 91       	pop	r18
+ 534:	0f 90       	pop	r0
+ 536:	0f be       	out	0x3f, r0	; 63
+ 538:	0f 90       	pop	r0
+ 53a:	1f 90       	pop	r1
+ 53c:	18 95       	reti
+
+0000053e <__vector_13>:
+
+ISR(USART_RXC_vect){
+ 53e:	1f 92       	push	r1
+ 540:	0f 92       	push	r0
+ 542:	0f b6       	in	r0, 0x3f	; 63
+ 544:	0f 92       	push	r0
+ 546:	11 24       	eor	r1, r1
+ 548:	2f 93       	push	r18
+ 54a:	3f 93       	push	r19
+ 54c:	4f 93       	push	r20
+ 54e:	5f 93       	push	r21
+ 550:	6f 93       	push	r22
+ 552:	7f 93       	push	r23
+ 554:	8f 93       	push	r24
+ 556:	9f 93       	push	r25
+ 558:	af 93       	push	r26
+ 55a:	bf 93       	push	r27
+ 55c:	ef 93       	push	r30
+ 55e:	ff 93       	push	r31
+	
+	if ( Receiver_Ptr != NULL){
+ 560:	e0 91 88 00 	lds	r30, 0x0088	; 0x800088 <Receiver_Ptr>
+ 564:	f0 91 89 00 	lds	r31, 0x0089	; 0x800089 <Receiver_Ptr+0x1>
+ 568:	30 97       	sbiw	r30, 0x00	; 0
+ 56a:	09 f0       	breq	.+2      	; 0x56e <__vector_13+0x30>
+			Receiver_Ptr();
+ 56c:	09 95       	icall
+	}
+}
+ 56e:	ff 91       	pop	r31
+ 570:	ef 91       	pop	r30
+ 572:	bf 91       	pop	r27
+ 574:	af 91       	pop	r26
+ 576:	9f 91       	pop	r25
+ 578:	8f 91       	pop	r24
+ 57a:	7f 91       	pop	r23
+ 57c:	6f 91       	pop	r22
+ 57e:	5f 91       	pop	r21
+ 580:	4f 91       	pop	r20
+ 582:	3f 91       	pop	r19
+ 584:	2f 91       	pop	r18
+ 586:	0f 90       	pop	r0
+ 588:	0f be       	out	0x3f, r0	; 63
+ 58a:	0f 90       	pop	r0
+ 58c:	1f 90       	pop	r1
+ 58e:	18 95       	reti
+
+00000590 <_exit>:
+ 590:	f8 94       	cli
+
+00000592 <__stop_program>:
+ 592:	ff cf       	rjmp	.-2      	; 0x592 <__stop_program>
